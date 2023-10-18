@@ -3,11 +3,11 @@ import log from 'log';
 
 function runLogger() {
   process.env['LOG_LEVEL'] = process.env['DEBUG'] ? 'debug' : 'info';
-  const Level = process.env['LOG_LEVEL'];
-  const Writter = logNode();
+  const level = process.env['LOG_LEVEL'];
+  const writter = logNode();
   return {
-    Level,
-    Writter,
+    level,
+    writter,
     log
   }
 }
@@ -21,6 +21,6 @@ export function createLogger() {
   }
 }
 
-const useLogger = createLogger();
+export const useLogger = createLogger();
 export default useLogger;
 

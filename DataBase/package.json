@@ -1,20 +1,22 @@
 {
-  "name": "database",
+  "name": "todolist_database",
   "version": "1.0.0",
   "description": "...",
-  "main": "script.mock.js",
+  "main": "main.js",
   "type": "module",
   "scripts": {
+    "start": "node main.js",
+    "dev": "node --watch main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@types/node": "^20.8.5",
     "dotenv": "^16.3.1",
     "log": "^6.3.1",
     "log-node": "^8.0.3",
-    "mysql": "^2.18.1"
+    "mysql2": "^3.6.2"
   }
 }

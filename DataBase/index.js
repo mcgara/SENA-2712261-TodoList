@@ -1,10 +1,9 @@
-import path from 'node:path';
-import { URL } from 'node:url'
-import dotenv from 'dotenv';
+import { joinWithRoot } from './utils.js';
+import useLogger from './logger.js';
 
-const __dirname = new URL('.', import.meta.url).pathname;
+export const dotenvPath = joinWithRoot('.env');
 
-dotenv.config({
-  path: path.join(__dirname, '.env'),
-  override: true
-})
+export default {
+  dotenvPath,
+  useLogger
+}
