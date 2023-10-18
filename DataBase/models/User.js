@@ -1,14 +1,15 @@
-import connection from '../connection.js';
 import useLogger from '../logger.js';
-
 const logger = useLogger();
 
-// Test Table User
-export function runTest() {
-  connection.query('SELECT * FROM User', (err, result) => {
-    if (err) logger.log.error(`MySqlQuery %s: ${err.message}`, err.code);
-    else if (result) logger.log.notice('%s', 'MySqlQuery: ' + result);
-  })
+/** @param {import('./models.js').ConnectionModels} connection */
+export async function runTest(connection) {
+  const db = await connection;
+  if (!db) return;
+
+  try {
+    const results = await db.query('SELECT * FROM User');
+    if (results) logger.log.notice('MySqlQuery: %s', String(results));
+  } catch (err) { logger.log.error(`MySqlQuery %s: ${err.message}`, err.code ?? ''); }
 }
 
 export default {

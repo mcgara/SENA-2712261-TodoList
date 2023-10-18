@@ -1,5 +1,6 @@
 import logNode from 'log-node';
 import log from 'log';
+import { onceCallback } from './utils.js';
 
 function runLogger() {
   process.env['LOG_LEVEL'] = process.env['DEBUG'] ? 'debug' : 'info';
@@ -12,15 +13,6 @@ function runLogger() {
   }
 }
 
-export function createLogger() {
-  /** @type {ReturnType<runLogger>} */
-  let logData = null;
-  return () => {
-    if (logData === null) logData = runLogger();
-    return logData;
-  }
-}
-
-export const useLogger = createLogger();
+export const useLogger = onceCallback(runLogger);
 export default useLogger;
 
