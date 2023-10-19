@@ -7,7 +7,7 @@ export const root = __dirname;
 
 /** @param {string[]} paths */
 export function joinWithRoot(...paths) {
-  return path.join(root, ...paths);
+  return path.normalize(path.join(root, ...paths));
 }
 
 /**

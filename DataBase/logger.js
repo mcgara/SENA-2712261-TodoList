@@ -15,4 +15,3 @@ function runLogger() {
 
 export const useLogger = onceCallback(runLogger);
 export default useLogger;
-

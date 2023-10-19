@@ -9,36 +9,41 @@ export const modelsFilePath = joinWithRoot('models/models.sql');
 export const modelsFile = readFile(modelsFilePath, { encoding: 'utf-8' });
 
 /** @param {typeof defaultConnection} connection */
-export async function createConnectionModels(connection) {
+export async function createModelsConnection(connection) {
   /** @type {string | null} */
   let script = null;
-  try { script = await modelsFile; }
-  catch (err) {
-    logger.log.error(`FileSystemError ` + err.message ?? 'unknown error.');
-  }
-
-  if (!script) return null;
-  
-  let connectionModels = null;
   try {
-    connectionModels = await connection;
-    await connectionModels.query(script);
+    script = await modelsFile;
+  } catch (err) {
+    logger.log.error(`FileSystemError: ` + err.message ?? 'unknown error.');
+  }
+  
+  let modelsConnection = null;
+  if (script === null) return modelsConnection;
+  
+  try {
+    const queries = script.trim().split(';').map(query => query.trim());
+    modelsConnection = await connection;
+    for (const query of queries) {
+      if (!query) continue;
+      await modelsConnection.query(query);
+    }
     logger.log.notice('%s', 'MySqlQueryModel: successful query.');
   } catch (err) {
     logger.log.error(`MySqlQueryModel %s: ${err.message ?? 'unknown error.'}`, err.code ?? '');
-    connectionModels = null;
+    modelsConnection = null;
   }
 
-  return connectionModels;
+  return modelsConnection;
 }
 
-/** @typedef {ReturnType<createConnectionModels>} ConnectionModels */
+/** @typedef {ReturnType<createModelsConnection>} ModelsConnection */
 
-export const useConnectionModels = onceCallback(createConnectionModels, defaultConnection);
+export const useModelsConnection = onceCallback(createModelsConnection, defaultConnection);
 
 export default {
   filePath: modelsFilePath,
   file: modelsFile,
-  createConnection: createConnectionModels,
-  useConnectionModels
+  createConnection: createModelsConnection,
+  useConnection: useModelsConnection
 }

@@ -1,37 +1,43 @@
--- MySQL Workbench Synchronization
--- Generated: 2023-10-18 16:59
--- Model: New Model
--- Version: 1.0
--- Project: Name of the project
--- Author: SENA
+-- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
-ALTER SCHEMA `todolist_database`  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci ;
+-- -----------------------------------------------------
+-- Schema todolist_database
+-- -----------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `todolist_database`.`User` (
-  `id` INT(11) NOT NULL,
-  `name` VARCHAR(255) NOT NULL,
-  `lastname` VARCHAR(255) NULL DEFAULT NULL,
-  `username` (16) NOT NULL,
-  `email` (255) NULL,
-  `password` (32) NOT NULL,
-  `create_time`  NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+-- -----------------------------------------------------
+-- Schema todolist_database
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `todolist_database` DEFAULT CHARACTER SET utf8 ;
+USE `todolist_database` ;
 
-CREATE TABLE IF NOT EXISTS `todolist_database`.`Tak` (
-  `id` INT(11) NOT NULL,
+-- -----------------------------------------------------
+-- Table `todolist_database`.`task`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `todolist_database`.`task` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(255) NOT NULL,
-  `description` TEXT NULL DEFAULT NULL,
+  `description` TEXT NULL,
   `state` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `todolist_database`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `todolist_database`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  `lastname` VARCHAR(100) NULL,
+  `username` VARCHAR(16) NOT NULL,
+  `email` VARCHAR(255) NULL,
+  `password` VARCHAR(32) NOT NULL,
+  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`));
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

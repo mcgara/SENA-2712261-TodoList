@@ -1,10 +1,20 @@
 import models from './models.js';
-import User from './User.js';
+import UserModel from './User.js';
+import TaskModel from './Task.js';
+
+export const modelsFile = models.file;
+export const modelsFilePath = models.filePath;
+export const createModelsConnection = models.createConnection;
+export const useModelsConnection = models.useConnection;
+
+export const useUserModel = UserModel;
+export const useTaskModel = TaskModel;
 
 export default {
   file: models.file,
   filePath: models.filePath,
   createConnection: models.createConnection,
-  useConnection: models.useConnectionModels,
-  User
+  useConnection: models.useConnection,
+  useUser: useUserModel,
+  useTask: useTaskModel
 }
