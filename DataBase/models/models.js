@@ -28,7 +28,7 @@ export async function createModelsConnection(connection) {
       if (!query) continue;
       await modelsConnection.query(query);
     }
-    logger.log.notice('%s', 'MySqlQueryModel: successful query.');
+    logger.log.notice('%s', 'MySqlQuery: successful query of models file.');
   } catch (err) {
     logger.log.error(`MySqlQueryModel %s: ${err.message ?? 'unknown error.'}`, err.code ?? '');
     modelsConnection = null;

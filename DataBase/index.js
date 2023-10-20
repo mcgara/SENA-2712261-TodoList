@@ -1,10 +1,15 @@
 import { joinWithRoot } from './utils.js';
 import useLogger from './logger.js';
+import models from './models/index.js';
+import utils from './utils.js';
 
-export const dotenvAppPath = joinWithRoot('../.env');
-export const dotenvPath = joinWithRoot('.env');
+const dotenvPathApp = joinWithRoot('../.env');
+const dotenvPath = joinWithRoot('.env');
 
 export default {
   dotenvPath,
-  useLogger
+  dotenvPathApp,
+  useLogger,
+  ...models,
+  utils
 }

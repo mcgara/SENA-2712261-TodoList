@@ -11,8 +11,8 @@ export const useUserModel = UserModel;
 export const useTaskModel = TaskModel;
 
 export default {
-  file: models.file,
-  filePath: models.filePath,
+  modelsFile,
+  modelsFilePath,
   createConnection: models.createConnection,
   useConnection: models.useConnection,
   useUser: useUserModel,

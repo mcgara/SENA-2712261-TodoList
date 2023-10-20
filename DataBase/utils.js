@@ -31,5 +31,6 @@ export function onceCallback(callback, ...args) {
 
 export default {
   root,
-  joinWithRoot
+  joinWithRoot,
+  onceCallback
 }
