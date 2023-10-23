@@ -29,8 +29,13 @@ export function onceCallback(callback, ...args) {
   }
 }
 
+export const dotenvPathApp = joinWithRoot('../.env');
+export const dotenvPath = joinWithRoot('.env');
+
 export default {
   root,
   joinWithRoot,
-  onceCallback
+  onceCallback,
+  dotenvPathApp,
+  dotenvPath
 }
