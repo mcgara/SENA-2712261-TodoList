@@ -2,13 +2,13 @@ import { readFile } from 'node:fs/promises';
 import { joinWithRoot, onceCallback } from '../utils.js';
 import useLogger from '../logger.js';
 
-import defaultConnection from '../connection.js';
+import useDefaultConnection from '../connection.js';
 
 const logger = useLogger();
 export const modelsFilePath = joinWithRoot('models/models.sql');
 export const modelsFile = readFile(modelsFilePath, { encoding: 'utf-8' });
 
-/** @param {typeof defaultConnection} connection */
+/** @param {Awaited<ReturnType<useDefaultConnection>>} connection */
 export async function createModelsConnection(connection) {
   /** @type {string | null} */
   let script = null;
@@ -39,7 +39,7 @@ export async function createModelsConnection(connection) {
 
 /** @typedef {ReturnType<createModelsConnection>} ModelsConnection */
 
-export const useModelsConnection = onceCallback(createModelsConnection, defaultConnection);
+export const useModelsConnection = onceCallback(async () => createModelsConnection(await useDefaultConnection()));
 
 export default {
   filePath: modelsFilePath,
