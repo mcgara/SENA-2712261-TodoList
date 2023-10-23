@@ -4,7 +4,7 @@ const logger = useLogger();
 /** @typedef {import('./Task').Task} ITask */
 
 /**
- * @param {import('./models.js').ConnectionModels} connection
+ * @param {import('./models.js').ModelsConnection} connection
  * @param {number} id
  */
 export async function TaskFindById(connection, id) {
@@ -24,7 +24,7 @@ export async function TaskFindById(connection, id) {
   return Task;
 }
 
-/** @param {import('./models.js').ConnectionModels} connection */
+/** @param {import('./models.js').ModelsConnection} connection */
 export function useTaskModel(connection) {
   return {
     findById: id => TaskFindById(connection, id)
