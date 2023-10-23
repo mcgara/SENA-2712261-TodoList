@@ -3,7 +3,7 @@ const logger = useLogger();
 
 /** @typedef {import('./User').User} IUser */
 
-/** @param {import('./models.js').ConnectionModels} connection */
+/** @param {import('./models.js').ModelsConnection} connection */
 export async function UserRunTest(connection) {
   const db = await connection;
   if (!db) return;
@@ -17,7 +17,7 @@ export async function UserRunTest(connection) {
 }
 
 /**
- * @param {import('./models.js').ConnectionModels} connection
+ * @param {import('./models.js').ModelsConnection} connection
  * @param {number} id
  */
 export async function UserFindById(connection, id) {
@@ -37,7 +37,7 @@ export async function UserFindById(connection, id) {
   return User;
 }
 
-/** @param {import('./models.js').ConnectionModels} connection */
+/** @param {import('./models.js').ModelsConnection} connection */
 export function useUserModel(connection) {
   return {
     runTest: () => UserRunTest(connection),
