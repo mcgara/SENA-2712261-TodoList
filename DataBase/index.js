@@ -3,13 +3,10 @@ import useLogger from './logger.js';
 import models from './models/index.js';
 import utils from './utils.js';
 
-const dotenvPathApp = utils.joinWithRoot('../.env');
-const dotenvPath = utils.joinWithRoot('.env');
-
 const runDataBase = utils.onceCallback(async () => {
-  dotenv.config({ path: dotenvPathApp });
+  dotenv.config({ path: utils.dotenvPathApp });
   dotenv.config({
-    path: dotenvPath,
+    path: utils.dotenvPath,
     override: !(process.env['DOTENV_APP']?.toLowerCase() === 'true')
   });
 
@@ -23,14 +20,12 @@ const runDataBase = utils.onceCallback(async () => {
     logger.log.error('MySqlConnect: error connection failed.');
   }
 
-  return connection;
+  // return connection;
 })
 
 export default {
-  dotenvPath,
-  dotenvPathApp,
-  ...models,
   useLogger,
+  ...models,
   utils,
   runDataBase
 }
