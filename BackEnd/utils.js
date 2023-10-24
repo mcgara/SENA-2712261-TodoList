@@ -1,5 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import dotenv from 'dotenv';
+import { utils } from './database.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,9 +15,23 @@ export function joinWithRoot(...paths) {
 export const dotenvPathApp = joinWithRoot('../.env');
 export const dotenvPath = joinWithRoot('.env');
 
+export const onceCallback = utils.onceCallback;
+export const useLogger = utils.useLogger;
+
+export const useDotenv = onceCallback(() => {
+  dotenv.config({ path: dotenvPathApp });
+  dotenv.config({
+    path: dotenvPath,
+    override: !(process.env['DOTENV_APP']?.toLowerCase() === 'true')
+  });
+})
+
 export default {
   root,
   joinWithRoot,
+  onceCallback,
   dotenvPathApp,
-  dotenvPath
+  dotenvPath,
+  useDotenv,
+  useLogger
 }
