@@ -1,6 +1,5 @@
 import { readFile } from 'node:fs/promises';
-import { joinWithRoot, onceCallback } from '../utils.js';
-import useLogger from '../logger.js';
+import { joinWithRoot, onceCallback, useLogger } from '../utils.js';
 
 import useDefaultConnection from '../connection.js';
 
