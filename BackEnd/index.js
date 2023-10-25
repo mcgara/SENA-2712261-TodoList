@@ -1,17 +1,17 @@
-import express from 'express';
-import DB from '../DataBase/index.js';
-import utils from './utils.js';
+import useApp from './app.js';
+import useAppConfig from './app.config.js';
+import { onceCallback, useDotenv } from './utils.js';
+import { runDataBase } from './database.js';
 
-await DB.runDataBase();
-const connection = await DB.useConnection();
-const User = DB.useUser(connection)
-// console.log(await User.findById(1))
+export const runBackEnd = onceCallback(async () => {
+  await runDataBase();
+  useDotenv();
 
-const app = express();
+  const app = await useApp();
+  const appConfig = useAppConfig();
+  app.listen(appConfig.port, appConfig.host);
+});
 
-app.get('/user/:id', async (req, res) => {
-  const id = Number(req.params.id);
-  res.json(await User.findById(id));
-})
-
-app.listen(5500)
+export default {
+  runBackEnd
+}
