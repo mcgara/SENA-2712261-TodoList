@@ -3,19 +3,27 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "start": "node main.js",
+    "android": "node main.js --android",
+    "ios": "node main.js --ios",
+    "web": "node main.js --web",
+    "expo:start": "expo start",
+    "expo:android": "expo start --android",
+    "expo:ios": "expo start --ios",
+    "expo:web": "expo start --web"
   },
   "dependencies": {
+    "@expo/webpack-config": "^19.0.0",
+    "dotenv": "^16.3.1",
     "expo": "~49.0.15",
     "expo-status-bar": "~1.6.0",
+    "log": "^6.3.1",
+    "log-node": "^8.0.3",
     "react": "18.2.0",
-    "react-native": "0.72.6",
     "react-dom": "18.2.0",
-    "react-native-web": "~0.19.6",
-    "@expo/webpack-config": "^19.0.0"
+    "react-native": "0.72.6",
+    "react-native-path": "^0.0.5",
+    "react-native-web": "~0.19.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
