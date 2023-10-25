@@ -1,4 +1,4 @@
-import { ConnectionModels } from './models.js';
+import { ModelsConnection } from './models.js';
 
 export interface User {
   id: number
@@ -10,10 +10,10 @@ export interface User {
   create_time: string
 }
 
-export function UserRunTest(connection: ConnectionModels): Promise<void>
-export function UserFindById(connection: ConnectionModels, id: number): Promise<User | null>
+export function UserRunTest(connection: ModelsConnection): Promise<void>
+export function UserFindById(connection: ModelsConnection, id: number): Promise<User | null>
 
-export function UserModel(connection: ConnectionModels): {
+export function UserModel(connection: ModelsConnection): {
   runTest: () => ReturnType<typeof UserRunTest>
   findById: (id: number) => ReturnType<typeof UserFindById>
 }

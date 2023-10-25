@@ -2,7 +2,7 @@ import { onceCallback } from './utils.js';
 
 export const defaultAppConfig = {
   host: 'localhost',
-  port: 8100,
+  port: 8010,
   debug: false,
   backlog: null
 }

@@ -1,4 +1,4 @@
-import { ConnectionModels } from './models.js';
+import { ModelsConnection } from './models.js';
 
 export interface Task {
   id: number,
@@ -7,7 +7,7 @@ export interface Task {
   state: string
 }
 
-export function TaskFindById(connection: ConnectionModels, id: number): Promise<Task | null>
+export function TaskFindById(connection: ModelsConnection, id: number): Promise<Task | null>
 
 export function TaskModel(): {
   findById: (id: number) => ReturnType<typeof TaskFindById>
