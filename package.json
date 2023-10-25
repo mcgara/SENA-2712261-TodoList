@@ -2,9 +2,10 @@
   "name": "todolist",
   "version": "1.0.0",
   "description": "...",
+  "main": "main.js",
   "type": "module",
   "scripts": {
-    "start": "npm run backend",
+    "start": "node main.js",
     "database": "cd DataBase && npm start && cd ..",
     "backend": "cd BackEnd && npm start && cd ..",
     "frontend": "cd FrontEnd && npm start && cd ..",
