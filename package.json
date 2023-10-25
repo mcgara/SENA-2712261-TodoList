@@ -1,0 +1,16 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "...",
+  "type": "module",
+  "scripts": {
+    "start": "npm run backend",
+    "database": "cd DataBase && npm start && cd ..",
+    "backend": "cd BackEnd && npm start && cd ..",
+    "frontend": "cd FrontEnd && npm start && cd ..",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

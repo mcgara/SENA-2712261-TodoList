@@ -1,17 +1,15 @@
 import mysql from 'mysql2/promise.js';
-import defaultConnectionConfig from './connection.config.js';
-import useLogger from './logger.js';
-import { onceCallback } from './utils.js';
+import useDefaultConnectionConfig from './connection.config.js';
+import { onceCallback, useLogger } from './utils.js';
 
 const logger = useLogger();
 export const useConnection = onceCallback(() => {
-  const defaultConnection = mysql.createConnection(defaultConnectionConfig());
+  const defaultConnection = mysql.createConnection(useDefaultConnectionConfig());
   defaultConnection.catch(err => {
     logger.log.error(`MySqlConnect %s: ${err.message ?? 'unknown error.'}`, err.code ?? '');
   })
 
   return defaultConnection;
 })
-
 
 export default useConnection;
