@@ -6,7 +6,7 @@ export function User({ id }) {
   const [dataUser, setDataUser] = useState(null)
 
   useEffect(() => {
-    fetch('http://192.168.1.110:8011/user/' + id)
+    fetch('http://10.174.146.101:5500/user/' + id)
       .then(response => response.json())
       .then(data => setDataUser(data))
   }, [id])

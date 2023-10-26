@@ -18,7 +18,8 @@ const useFronEndEnv = onceCallback(() => {
     host: process.env['FE_HOST'],
     port: process.env['FE_PORT'],
     https: process.env['FE_HTTPS'],
-    localhost: process.env['FE_LOCALHOST']
+    localhost: process.env['FE_LOCALHOST'],
+    offline: process.env['FE_OFFLINE']
   }
   
   if (frontend.host) process.env['EXPO_PACKAGER_PROXY_URL'] = frontend.host;
@@ -26,6 +27,7 @@ const useFronEndEnv = onceCallback(() => {
   if (frontend.port) argv.push('--port', frontend.port);
   if (frontend.https === 'true') argv.push('--https');
   if (frontend.localhost === 'true') argv.push('--localhost');
+  if (frontend.offline === 'true') argv.push('--offline');
 
   return argv;
 })
