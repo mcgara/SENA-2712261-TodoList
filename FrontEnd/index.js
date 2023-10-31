@@ -10,6 +10,7 @@ const runFrontEndSpawnOptions = {
 }
 
 const prefixExpoEnv = 'EXPO_PUBLIC';
+const defaultApiUrl = 'http://localhost:8010';
 
 const useFronEndEnv = onceCallback(() => {
   useDotenv();
@@ -32,24 +33,30 @@ const useFronEndEnv = onceCallback(() => {
   return argv;
 })
 
-const useBackEndEnv = onceCallback(() => {
+const useApiEnv = onceCallback(() => {
   useDotenv();
 
-  const backend = {
-    BE_HOST: process.env['BE_HOST'],
-    BE_PORT: process.env['BE_PORT']
+  const api = {
+    API_HOST: process.env['BE_HOST'],
+    API_PORT: process.env['BE_PORT'],
+    API_URL: process.env['BE_URL']
   }
+
+  const url = `http://${api.API_HOST}:${api.API_PORT}`;
+  if (!api.API_URL && api.API_HOST && api.API_PORT) api.API_URL = url;
+  else if (!api.API_URL) api.API_URL = defaultApiUrl;
   
-  Object.keys(backend).forEach(key => {
-    if (!backend[key]) return;
-    process.env[prefixExpoEnv + '_' + key] = backend[key];
+  Object.keys(api).forEach(key => {
+    if (!api[key]) return;
+    const envKey = prefixExpoEnv + '_' + key
+    if (!process.env[envKey]) process.env[envKey] = api[key];
   });
 })
 
 function runFrontEnd() {
   const logger = useLogger();
   
-  useBackEndEnv();
+  useApiEnv();
   const argv = [
     ...process.argv.slice(2),
     ...useFronEndEnv()
@@ -64,6 +71,6 @@ module.exports = {
   runFrontEndSpawnOptions,
   prefixExpoEnv,
   useFronEndEnv,
-  useBackEndEnv,
+  useApiEnv,
   runFrontEnd
 }
