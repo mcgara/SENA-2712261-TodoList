@@ -31,9 +31,7 @@ const useAppConfig = onceCallback(() => {
     ...appConfigEnv
   }
 
-  console.log(appConfig)
-
-  return appConfig;
+    return appConfig;
 })
 
 export default useAppConfig;
