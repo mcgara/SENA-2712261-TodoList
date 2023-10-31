@@ -8,9 +8,9 @@ export const runDataBase = onceCallback(async () => {
   const connection = await useModelsConnection();
   if (connection) {
     await connection.connect();
-    logger.log.notice('%s', 'MySqlConnect: successful connection.');
+    logger.log.notice('%s', 'DATABASE: successful connection.');
   } else {
-    logger.log.error('MySqlConnect: error connection failed.');
+    logger.log.error('DATABASE: ', 'error CONNECT to database failed.');
   }
 })
 

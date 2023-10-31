@@ -22,7 +22,7 @@ export async function UserFindById(connection, id) {
     const result = await db.query(query, [id]);
     if (result[0].length > 0) User = result[0][0];
   } catch (err) {
-    logger.log.error(`MySqlQuery %s: ${err.message}`, err.code ?? '');
+    logger.log.error('DATABASE: ', err.message);
   }
   return User;
 }

@@ -6,7 +6,7 @@ const logger = useLogger();
 export const useConnection = onceCallback(() => {
   const defaultConnection = mysql.createConnection(useDefaultConnectionConfig());
   defaultConnection.catch(err => {
-    logger.log.error(`MySqlConnect %s: ${err.message ?? 'unknown error.'}`, err.code ?? '');
+    logger.log.error('DATABASE:', err.message ?? 'error create connection in MySQL database.');
   })
 
   return defaultConnection;

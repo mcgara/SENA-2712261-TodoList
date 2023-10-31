@@ -14,7 +14,7 @@ export async function createModelsConnection(connection) {
   try {
     script = await modelsFile;
   } catch (err) {
-    logger.log.error(`FileSystemError: ` + err.message ?? 'unknown error.');
+    logger.log.error('DATABASE: ', err.message ?? 'error on load models file.');
   }
   
   let modelsConnection = null;
@@ -27,9 +27,9 @@ export async function createModelsConnection(connection) {
       if (!query) continue;
       await modelsConnection.query(query);
     }
-    logger.log.notice('%s', 'MySqlQueryModel: successful query of models file.');
+    logger.log.notice('%s: successful query of models file.', 'DATABASE');
   } catch (err) {
-    logger.log.error(`MySqlQueryModel %s: ${err.message ?? 'unknown error.'}`, err.code ?? '');
+    logger.log.error(`DATABASE: ', '${err.message ?? 'error execute models file.'}`, err.code ?? '');
     modelsConnection = null;
   }
 
