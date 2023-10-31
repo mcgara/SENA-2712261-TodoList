@@ -7,7 +7,7 @@ const logger = useLogger();
 export const modelsFilePath = joinWithRoot('models/models.sql');
 export const modelsFile = readFile(modelsFilePath, { encoding: 'utf-8' });
 
-/** @param {Awaited<ReturnType<useDefaultConnection>>} connection */
+/** @param {ReturnType<useDefaultConnection>} connection */
 export async function createModelsConnection(connection) {
   /** @type {string | null} */
   let script = null;
@@ -38,7 +38,7 @@ export async function createModelsConnection(connection) {
 
 /** @typedef {ReturnType<createModelsConnection>} ModelsConnection */
 
-export const useModelsConnection = onceCallback(async () => createModelsConnection(await useDefaultConnection()));
+export const useModelsConnection = onceCallback(() => createModelsConnection(useDefaultConnection()));
 
 export default {
   filePath: modelsFilePath,

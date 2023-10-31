@@ -30,7 +30,6 @@ export async function UserFindById(connection, id) {
 /** @param {ModelsConnection} connection */
 export function useUserModel(connection) {
   return {
-    runTest: () => UserRunTest(connection),
     findById: id => UserFindById(connection, id)
   }
 }
