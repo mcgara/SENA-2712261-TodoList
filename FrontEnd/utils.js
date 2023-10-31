@@ -1,14 +1,13 @@
 /**
- * @template T, P
- * @param {(...args: P) => T} callback
- * @param {P} args
- * @return {() => T}
+ * @template {(...args: any) => any} T
+ * @param {T} callback
+ * @return {T}
  */
-function onceCallback(callback, ...args) {
+function onceCallback(callback) {
   if (typeof callback !== 'function') throw TypeError('parameter callback must be type function');
   let value;
   let onceCall = false;
-  return () => {
+  return (...args) => {
     if (!onceCall) {
       value = callback(...args);
       onceCall = true;

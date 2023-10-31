@@ -48,7 +48,7 @@ const useApiEnv = onceCallback(() => {
   
   Object.keys(api).forEach(key => {
     if (!api[key]) return;
-    const envKey = prefixExpoEnv + '_' + key
+    const envKey = prefixExpoEnv + '_' + key;
     if (!process.env[envKey]) process.env[envKey] = api[key];
   });
 })
