@@ -5,7 +5,7 @@ const commandRunFrontEnd = 'npx expo start';
 
 /** @type {import('node:child_process').SpawnOptions} */
 const runFrontEndSpawnOptions = {
-  stdio: 'inherit',
+  stdio: ['pipe', 'inherit', 'inherit'],
   shell: true
 }
 
