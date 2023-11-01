@@ -1,12 +1,12 @@
 import api from './api';
 
-/** @typedef {import('./user').User} IUser */
+/** @typedef {import('./types').User} IUser */
 
 /**
  * @param {number} id
- * @return {Promise<IUser> | null}
+ * @return {Promise<IUser | null>}
  */
-export const getUserById = (id) => !api ? null : api.get('/user/' + id);
+export const getUserById = async (id) => !api ? null : (await (api.get('/user/' + id))).data;
 
 export default {
   getById: getUserById
