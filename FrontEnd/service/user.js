@@ -1,12 +1,12 @@
-import api from './api';
+import { api, routes } from './api'
 
-/** @typedef {import('./types').User} IUser */
+/** @typedef {import('./types').User} User */
 
 /**
- * @param {number} id
- * @return {Promise<IUser | null>}
+ * @param {number | string} id
+ * @return {Promise<User | null>}
  */
-export const getUserById = async (id) => !api ? null : (await (api.get('/user/' + id))).data;
+export const getUserById = async (id) => !api ? null : (await (api.get(routes.user.get(id)))).data;
 
 export default {
   getById: getUserById
