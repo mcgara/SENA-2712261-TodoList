@@ -11,7 +11,11 @@ const runFrontEndSpawnOptions = {
 }
 
 const prefixExpoEnv = 'EXPO_PUBLIC';
-const defaultApiUrl = 'http://localhost:8010';
+const defaultAPI = {
+  host: 'localhost',
+  port: 8010,
+  protocol: 'http'
+}
 
 const useFronEndEnv = onceCallback(() => {
   useDotenv();
@@ -46,13 +50,19 @@ const useApiEnv = onceCallback(() => {
   const api = {
     API_HOST: process.env['BE_HOST'],
     API_PORT: process.env['BE_PORT'],
+    API_HTTPS: process.env['BE_HTTPS']?.toLowerCase() === 'true',
     API_URL: process.env['BE_URL']
   }
 
-  const url = `http://${api.API_HOST}:${api.API_PORT}`;
-  if (!api.API_URL && api.API_HOST && api.API_PORT) api.API_URL = url;
-  else if (!api.API_URL) api.API_URL = defaultApiUrl;
-  
+  if (!api.API_URL) {
+    const { protocol, host, port } = defaultAPI;
+    const url = new URL(`${protocol}://${host}:${port}`);
+    if (api.API_HOST) url.hostname = api.API_HOST;
+    if (api.API_PORT) url.port = api.API_PORT;
+    if (api.API_HTTPS) url.protocol = 'https';
+    api.API_URL = url.href;
+  }
+
   Object.keys(api).forEach(key => {
     if (!api[key]) return;
     const envKey = prefixExpoEnv + '_' + key;
