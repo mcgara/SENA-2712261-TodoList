@@ -1,16 +1,21 @@
-import { URL } from 'url';
-import axios from 'axios';
+import axios from 'axios'
+import { createRouter } from './router'
 
-export const API_URL = (() => {
-  let url = null;
-  try {
-    url = new URL(process.env['EXPO_PUBLIC_API_URL']);
-  } catch (err) {
-    // Handler error url, logger
-  }
+export const API_URL = process.env['EXPO_PUBLIC_API_URL'] ?? null
+export const API_ROUTES = {
+  USER: '/user',
+  TASK: '/task'
+}
 
-  return url;
-})();
+export const routes = {
+  user: createRouter(API_ROUTES.USER),
+  task: createRouter(API_ROUTES.TASK)
+}
 
-export const api = !API_URL ? null : axios.create({ baseURL: API_URL });
-export default api;
+export const api = !API_URL ? null : axios.create({ baseURL: API_URL })
+export default {
+  API_URL,
+  API_ROUTES,
+  api,
+  routes
+}
