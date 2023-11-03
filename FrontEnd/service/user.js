@@ -6,7 +6,13 @@ import { api, routes } from './api'
  * @param {number | string} id
  * @return {Promise<User | null>}
  */
-export const getUserById = async (id) => !api ? null : (await (api.get(routes.user.get(id)))).data;
+export const getUserById = async (id) => {
+  if (!api) return null
+  let user = null
+  try { user = (await api.get(routes.user.get(id))).data }
+  catch (err) { console.error(err) }
+  return user
+}
 
 export default {
   getById: getUserById
