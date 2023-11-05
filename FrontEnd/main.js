@@ -1,3 +1,3 @@
-const { runFrontEnd } = require('./index.js');
+const { useFrontEnd } = require('./index.js');
 
-runFrontEnd();
+useFrontEnd();
