@@ -38,7 +38,7 @@ export const useDotenv = onceCallback(() => {
   dotenv.config({ path: dotenvPathApp });
   dotenv.config({
     path: dotenvPath,
-    override: !(process.env['DOTENV_APP']?.toLowerCase() === 'true')
+    override: !(process.env['DOTENV_APP_OVERRIDE']?.toLowerCase() === 'true')
   });
 })
 
