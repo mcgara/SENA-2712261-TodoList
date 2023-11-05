@@ -10,11 +10,9 @@ export interface User {
   create_time: string
 }
 
-export function UserRunTest(connection: ModelsConnection): Promise<void>
 export function UserFindById(connection: ModelsConnection, id: number): Promise<User | null>
 
 export function UserModel(connection: ModelsConnection): {
-  runTest: () => ReturnType<typeof UserRunTest>
   findById: (id: number) => ReturnType<typeof UserFindById>
 }
 

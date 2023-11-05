@@ -1,12 +1,11 @@
 import { Router } from 'express';
 import { onceCallback } from '../utils.js';
-import { useConnection, useUser } from '../database.js';
+import { useDataBase, useUser } from '../database.js';
 
 const userRoute = Router();
 
 const useUserRoute = onceCallback(async () => {
-  const connection = await useConnection();
-  const User = useUser(connection);
+  const User = useUser(await useDataBase());
 
   userRoute.get('/:id', async (req, res) => {
     const id = Number(req.params.id);

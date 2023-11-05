@@ -1,3 +1,3 @@
-import { runDataBase } from './index.js';
+import { useDataBase } from './index.js';
 
-await runDataBase();
+await useDataBase();

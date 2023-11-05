@@ -2,10 +2,10 @@ import { URL } from 'node:url';
 import useApp from './app.js';
 import useAppConfig from './app.config.js';
 import { onceCallback, useDotenv, useLogger } from './utils.js';
-import { runDataBase } from './database.js';
+import { useDataBase } from './database.js';
 
-export const runBackEnd = onceCallback(async () => {
-  await runDataBase();
+export const useBackEnd = onceCallback(async () => {
+  await useDataBase();
   useDotenv();
   const logger = useLogger();
 
@@ -15,8 +15,10 @@ export const runBackEnd = onceCallback(async () => {
   app.listen(config.port, config.host, () => {
     logger.log.notice('%s: server listen on ' + url.href, 'BACKEND')
   });
+
+  return app;
 });
 
 export default {
-  runBackEnd
+  useBackEnd
 }

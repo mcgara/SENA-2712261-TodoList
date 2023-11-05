@@ -1,8 +1,7 @@
 import DB from '../DataBase/index.js';
 
 export const {
-  runDataBase,
-  useConnection,
+  useDataBase,
   utils,
   
   useTask,

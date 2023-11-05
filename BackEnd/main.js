@@ -1,3 +1,3 @@
-import { runBackEnd } from "./index.js";
+import { useBackEnd } from "./index.js";
 
-await runBackEnd();
+await useBackEnd();
