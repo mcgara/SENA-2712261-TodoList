@@ -16,10 +16,10 @@ const initialScreenStyles = StyleSheet.create({
  * @typedef {ScreenNames} ScreenKey
  * @typedef {typeof initialScreenStyles} ScreenStyles
  * @typedef {import('react').Dispatch<import('react').SetStateAction<ScreenStyles>> SetScreenStyles}
- * @typedef {import('react').Dispatch<import('react').SetStateAction<ScreenKey>>} SetStateScreen
+ * @typedef {import('react').Dispatch<import('react').SetStateAction<ScreenKey>>} SetScreen
  * @typedef {import('react').Context<{
  *   screen: ScreenKey,
- *   setScreen: SetStateScreen,
+ *   setScreen: SetScreen,
  *   screenStyles: ScreenStyles,
  *   setScreenStyles: SetScreenStyles
  * }>} ScreenContextValue
@@ -42,7 +42,7 @@ export function ScreensProvider({ children: ScreenDefault, screens }) {
   const [screen, setScreen] = useState()
   const [screenStyles, setScreenStyles] = useState(initialScreenStyles)
 
-  const valueProvider ={
+  const valueContext ={
     screen,
     setScreen,
     screenStyles,
@@ -50,7 +50,7 @@ export function ScreensProvider({ children: ScreenDefault, screens }) {
   }
   
   return (
-    <ScreensContext.Provider value={valueProvider}>
+    <ScreensContext.Provider value={valueContext}>
       {screens[screen] ?? ScreenDefault}
     </ScreensContext.Provider>
   )
