@@ -1,15 +1,11 @@
 import { View, StyleSheet, useWindowDimensions } from 'react-native'
 
 /**
- * @typedef {import('react-native').StyleProp<import('react-native').ViewStyle>} ViewStyleProp
- * @typedef {import('react').FC<ViewStyleProp>} FCViewStyleProp
+ * @typedef {{ style?: import('../types').ViewStyleProp }} BgCircleProp
+ * @type {import('react').FC<BgCircleProp>}
+ * @param {BgCircleProp}
  */
-
-/**
- * @type {FCViewStyleProp}
- * @param {{ style?: ViewStyleProp }}
- */
-export function CircleBg({ style }) {
+export function BgCircle({ style }) {
   const { width, height } = useWindowDimensions()
   if (!Array.isArray(style)) style = [style ?? {}]
 
@@ -20,26 +16,27 @@ export function CircleBg({ style }) {
 }
 
 /**
- * @type {FCViewStyleProp}
- * @param {{
- *   style: ViewStyleProp,
- *   styleCircle1?: ViewStyleProp,
- *   styleCircle2?: ViewStyleProp
- * }}
+ * @typedef {{
+ *   style: import('../types').ViewStyleProp,
+ *   circle1?: import('../types').ViewStyleProp,
+ *   circle2?: import('../types').ViewStyleProp
+ * }} BgCirclesProp
+ * @type {import('react').FC<BgCirclesProp>}
+ * @param {BgCirclesProp}
  */
-export function CirclesBg({ style, styleCircle1, styleCircle2 }) {
+export function BgCircles({ style, circle1, circle2 }) {
   if (!Array.isArray(style)) style = [style ?? {}]
-  if (!Array.isArray(styleCircle1)) styleCircle1 = [styleCircle1 ?? {}]
-  if (!Array.isArray(styleCircle2)) styleCircle2 = [styleCircle2 ?? {}]
+  if (!Array.isArray(circle1)) circle1 = [circle1 ?? {}]
+  if (!Array.isArray(circle2)) circle2 = [circle2 ?? {}]
 
   style.unshift(styles.style)
-  styleCircle1.unshift(styles.circle1)
-  styleCircle2.unshift(styles.circle2)
+  circle1.unshift(styles.circle1)
+  circle2.unshift(styles.circle2)
 
   return (
     <View style={style}>
-      <CircleBg style={styleCircle1}/>
-      <CircleBg style={styleCircle2}/>
+      <BgCircle style={circle1}/>
+      <BgCircle style={circle2}/>
     </View>
   )
 }
@@ -69,4 +66,4 @@ export const styles = StyleSheet.create({
   }
 })
 
-export default CirclesBg
+export default BgCircles
