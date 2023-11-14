@@ -1,4 +1,5 @@
 import { View, StyleSheet, TextInput } from 'react-native'
+import { toArray } from '../utils'
 
 /**
  * @typedef {import('react-native').TextInputProps & {
@@ -10,8 +11,8 @@ import { View, StyleSheet, TextInput } from 'react-native'
 export function SearchBar(props={}) {
   let { style, styleBar } = props
   
-  if (!Array.isArray(style)) style = [style]
-  if (!Array.isArray(styleBar)) styleBar = [styleBar]
+  style = toArray(style)
+  styleBar = toArray(styleBar)
 
   return (
     <View style={[styles.bar, ...styleBar]}>

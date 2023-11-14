@@ -1,26 +1,31 @@
 import { View, StyleSheet, useWindowDimensions } from 'react-native'
+import { toArray } from '../../utils'
 
 /**
  * @typedef {import('react').PropsWithChildren & {
- *   scale?: number,
- *   size?: number
+ *   styleIcon?: import('../types').ViewStyleProp,
+ *   scaleIcon?: number,
+ *   sizeIcon?: number
  * }} IconProps
  * @type {import('react').FC<IconProps>}
  * @param {IconProps}
  */
-export function Icon({ children, scale=0.1, size=45 }) {
+export function Icon({ children, styleIcon, sizeIcon, scaleIcon }) {
   const { width, height } = useWindowDimensions()
-  const sizeStyle = size ?? (width + height) / 2 * scale
-  const styles = getStyles(sizeStyle)
+
+  styleIcon = toArray(styleIcon)
+  scaleIcon = scaleIcon ?? 0.1
+  sizeIcon = sizeIcon ?? (width + height) / 2 * scaleIcon
+  const styles = getStyles(sizeIcon)
   
-  return <View style={[styles.container]}>{children}</View>
+  return <View style={[styles.container, ...styleIcon]}>{children}</View>
 }
 
-/** @param {number} [size] */
+/** @param {number} size */
 export const getStyles = size => StyleSheet.create({
   container: {
-    width: size ?? 45,
-    height: size ?? 45
+    width: size,
+    height: size
   }
 })
 

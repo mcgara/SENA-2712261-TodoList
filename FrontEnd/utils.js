@@ -16,6 +16,17 @@ function onceCallback(callback) {
   }
 }
 
+/**
+ * @template T
+ * @param {T} obj
+ * @return {T extends Array ? T : T[]}
+ */
+function toArray(obj) {
+  if (!Array.isArray(obj)) obj = [obj]
+  return obj
+}
+
 module.exports = {
-  onceCallback
+  onceCallback,
+  toArray
 }

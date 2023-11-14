@@ -56,7 +56,4 @@ export function ScreensProvider({ children: ScreenDefault, screens }) {
   )
 }
 
-export default {
-  Provider: ScreensProvider,
-  Context: ScreensContext
-}
+export default ScreensContext

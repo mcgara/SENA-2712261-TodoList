@@ -1,5 +1,6 @@
 import { View, StyleSheet } from 'react-native'
 import Icon from './Icon'
+import { toArray } from '../../utils'
 
 /**
  * @typedef {import('./Icon').IconProps & {
@@ -8,11 +9,11 @@ import Icon from './Icon'
  * @type {import('react').FC<MenuIconProps>}
  * @param {MenuIconProps}
  */
-export function MenuIcon({ scale, size, style }) {
-  if (!Array.isArray(style)) style = [style]
+export function MenuIcon({ sizeIcon, scaleIcon, styleIcon, style }) {
+  style = toArray(style)
   
   return (
-    <Icon scale={scale} size={size}>
+    <Icon sizeIcon={sizeIcon} scaleIcon={scaleIcon} styleIcon={styleIcon}>
       <View style={styles.container}>
         <View style={[styles.line, ...style]}/>
         <View style={[styles.line, ...style]}/>

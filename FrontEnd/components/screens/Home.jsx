@@ -1,22 +1,13 @@
 import { useContext } from 'react'
-import { ScreensContext } from '../../contexts/Screens'
 import { Pressable, View, Text, StyleSheet } from 'react-native'
-import { BgCircles } from '../designs/BgCircles'
+import ScreensContext from '../../contexts/Screens'
+import BgCircles from '../designs/BgCircles'
 import SearchBar from '../SearchBar'
 import MenuIcon from '../designs/MenuIcon'
 import UserIcon from '../designs/UserIcon'
-import BoxDate, { boxDateHandleMessage } from '../BoxDate'
-
-/** @param {Date} date */
-export function boxDateMessage(date) {
-  const message = boxDateHandleMessage(date)
-  const messages = {
-    'Good Morning': 'Buenos Días',
-    'Good Afternoon': 'Buenas Tardes',
-    'Good Night': 'Buenas Noches'
-  }
-  return messages[message]
-}
+import BoxDate from '../BoxDate'
+import { boxDateMessage } from '../../handlers/screens/home'
+import TaskList from '../TaskList'
 
 /** @type {import('react').FC<{}>} */
 export function HomeScreen() {
@@ -28,15 +19,18 @@ export function HomeScreen() {
       <BgCircles/>
       <View style={[screenStyles.container, styles.container]}>
         
-        <View style={styles.header}>
-          <View style={{ flexDirection: 'row' }}>
-            <MenuIcon/>
-            <SearchBar placeholder='Buscar Tareas' styleBar={{ width: '70%' }}/>
+        <View style={[styles.row, styles.header]}>
+          <View style={[styles.row]}>
+            <MenuIcon scaleIcon={0.085}/>
+            <SearchBar placeholder='Buscar Tareas' styleBar={styles.searchBar}/>
           </View>
-          <UserIcon/>
+          <UserIcon scaleIcon={0.085}/>
         </View>
 
         <BoxDate style={styles.boxDate} message={boxDateMessage}/>
+        
+        <TaskList/>
+        <TaskList/>
 
         <Pressable onPress={onPressScreen}>
           <View style={[styles.bg, styles.button]}>
@@ -63,7 +57,7 @@ export const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    top: 400,
+    top: 300,
     height: 100,
     width: 100,
     backgroundColor: 'blue',
@@ -78,12 +72,17 @@ export const styles = StyleSheet.create({
     marginTop: 5,
     width: '100%',
     height: 50,
-    backgroundColor: '#f4f3df',
+    backgroundColor: '#eee',
     borderRadius: 90,
     borderWidth: 2,
-    borderColor: '#e4e3cf',
-    flexDirection: 'row',
+    borderColor: '#d67821',
     justifyContent: 'space-between',
+  },
+  row: {
+    flexDirection: 'row'
+  },
+  searchBar: {
+    width: '70%'
   },
   boxDate: {
     marginTop: 15
